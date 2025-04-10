@@ -41,7 +41,12 @@ class DomainDate:
 
     @property
     def value(self) -> datetime:
-        return self.__value
+        return self.__value.replace(tzinfo=None)
 
     def __str__(self):
         return self.__value.strftime("%Y-%m-%dT%H:%M:%S.%f")
+
+    def __eq__(self, other):
+        if not isinstance(other, DomainDate):
+            return NotImplemented
+        return self.value == other.value
