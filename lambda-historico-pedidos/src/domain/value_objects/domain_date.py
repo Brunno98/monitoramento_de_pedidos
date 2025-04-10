@@ -2,6 +2,13 @@
 from domain.error.invalid_domain_date import InvalidDomainDateError
 from datetime import datetime, timezone
 
+VALID_FORMATS = [
+    "%Y-%m-%dT%H:%M:%S.%f",
+    "%Y-%m-%dT%H:%M:%S",
+    "%Y-%m-%d %H:%M:%S.%f",
+    "%Y-%m-%d %H:%M:%S",
+]
+
 
 class DomainDate:
 
@@ -22,8 +29,15 @@ class DomainDate:
         return cls(datetime.fromtimestamp(timestamp, tz))
 
     @classmethod
-    def from_str(cls, input: str, format="%Y-%m-%dT%H:%M:%S.%f") -> 'DomainDate':
-        return cls(datetime.strptime(input, format))
+    def from_str(cls, input: str) -> 'DomainDate':
+        for format in VALID_FORMATS:
+            try:
+                return cls(datetime.strptime(input, format))
+            except ValueError:
+                continue
+        raise InvalidDomainDateError(
+            f"Formato de data inválido: '{input}'. Formatos aceitos: {VALID_FORMATS}"
+        )
 
     @property
     def value(self) -> datetime:

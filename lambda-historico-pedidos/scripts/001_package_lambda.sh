@@ -10,4 +10,4 @@ cd package
 zip -r ../$PROJECT_NAME.zip .
 
 cd ..
-zip $PROJECT_NAME.zip src/*
+zip -r $PROJECT_NAME.zip src/*

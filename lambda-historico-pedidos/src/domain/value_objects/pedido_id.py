@@ -21,3 +21,8 @@ class PedidoId:
 
     def getValue(self) -> str:
         return self.__value
+
+    def __eq__(self, value):
+        if isinstance(value, PedidoId):
+            return self.getValue() == value.getValue()
+        return False

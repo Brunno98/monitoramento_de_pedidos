@@ -6,7 +6,7 @@ awslocal dynamodb put-item \
     --table-name "$TABLE_NAME" \
     --item '{
         "pedido_id": {
-            "S": "12411014531-1432-411-919a-2795735141"
+            "S": "2234e0d4532-1432-411-919a-2795735141"
         },
         "client_id": {
             "S": "60406360-13dc-4dee-9e8d-fc2205960c42"
@@ -18,6 +18,6 @@ awslocal dynamodb put-item \
             "S": "pendente"
         },
         "data_criacao": {
-            "S": "1744246138"
+            "S": "2025-04-10T17:50:42.123456"
         }
     }'
