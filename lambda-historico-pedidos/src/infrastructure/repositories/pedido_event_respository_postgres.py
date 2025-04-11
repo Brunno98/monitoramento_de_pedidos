@@ -20,3 +20,20 @@ class PedidoEventRepositoryPostgres(PedidoEventRepository):
                                 pedido.event_date.value
                             ))
         return True
+
+    def register_in_batch(self, pedidos: list[Pedido]):
+        values = [
+            (
+                pedido.pedido_id.getValue(),
+                pedido.acao,
+                pedido.status,
+                pedido.event_date.value
+            ) for pedido in pedidos
+        ]
+
+        with get_connection() as conn:
+            with conn.cursor() as cur:
+                cur.executemany("""
+                            INSERT INTO historico_pedidos ("pedido_id", "acao", "status", "data_evento")
+                            values (%s, %s, %s, %s);""", values)
+                conn.commit()

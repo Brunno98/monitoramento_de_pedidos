@@ -12,6 +12,6 @@ LATEST_STREAM_ARN=$(awslocal dynamodb describe-table --table-name "$TABLE_NAME" 
 awslocal lambda create-event-source-mapping \
     --function-name "$FUNCTION_NAME" \
     --event-source "$LATEST_STREAM_ARN"  \
-    --batch-size 100 \
+    --batch-size 200 \
     --starting-position TRIM_HORIZON \
     --maximum-batching-window-in-seconds 300
