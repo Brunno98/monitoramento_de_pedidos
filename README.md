@@ -36,6 +36,15 @@ Você tem uma tabela no DynamoDB chamada `Pedidos`. Toda vez que um novo pedido 
 
 ---
 
+### 🏃‍♂️ Como iniciar o projeto?
+
+1. Execute o comando `docker compose up -d` para subir os servicos que a aplicação depende
+2. Crie as tabelas no postgres com os SQSl localizados em [lambda-historico-pedidos/db-migrations](lambda-historico-pedidos/db-migrations)
+3. Execute os scrips localizados em [lambda-historico-pedidos/scripts](lambda-historico-pedidos/scripts) em ordem  
+  3.3. É necessário executar apenas até o script 003. Os outros são opcionais.  
+
+---
+
 ### 🧪 Fluxo de Teste:
 
 1. Insere um pedido na tabela `Pedidos` via código/script.
