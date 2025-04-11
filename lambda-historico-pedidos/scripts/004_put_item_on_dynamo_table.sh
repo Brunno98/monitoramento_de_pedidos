@@ -2,22 +2,19 @@
 
 TABLE_NAME=Pedidos
 
+
+pedido_id=$(uuidgen)
+client_id=$(uuidgen)
+data_criacao=$(date -u +"%Y-%m-%dT%H:%M:%S.%6N")
+
+echo "inserindo pedido $pedido_id..."
+
 awslocal dynamodb put-item \
     --table-name "$TABLE_NAME" \
-    --item '{
-        "pedido_id": {
-            "S": "2234e0d4532-1432-411-919a-2795735141"
-        },
-        "client_id": {
-            "S": "60406360-13dc-4dee-9e8d-fc2205960c42"
-        },
-        "valor_total": {
-            "N": "42.99"
-        },
-        "status": {
-            "S": "pendente"
-        },
-        "data_criacao": {
-            "S": "2025-04-10T17:50:42.123456"
-        }
-    }'
+    --item "{
+        \"pedido_id\": {\"S\": \"$pedido_id\"},
+        \"client_id\": {\"S\": \"$client_id\"},
+        \"valor_total\": {\"N\": \"42.99\"},
+        \"status\": {\"S\": \"pendente\"},
+        \"data_criacao\": {\"S\": \"$data_criacao\"}
+    }"
