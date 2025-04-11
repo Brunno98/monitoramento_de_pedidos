@@ -40,8 +40,15 @@ Você tem uma tabela no DynamoDB chamada `Pedidos`. Toda vez que um novo pedido 
 
 1. Execute o comando `docker compose up -d` para subir os servicos que a aplicação depende
 2. Crie as tabelas no postgres com os SQSl localizados em [lambda-historico-pedidos/db-migrations](lambda-historico-pedidos/db-migrations)
-3. Execute os scrips localizados em [lambda-historico-pedidos/scripts](lambda-historico-pedidos/scripts) em ordem  
-  3.3. É necessário executar apenas até o script 003. Os outros são opcionais.  
+3. Execute os scrips localizados em [lambda-historico-pedidos/scripts](lambda-historico-pedidos/scripts)
+em ordem  
+  3.1. É necessário executar apenas até o script 003. Os outros são opcionais.  
+  3.2. É preciso estar no no diretorio do `lambda-historico-pedidos` para os scripts funcionarem
+  corretamente devido a referecia  
+  3.3. É preciso dar permissão de execução para os scripts com o comando `chmod`.  
+  Ex: `chmod +x ./lambda-historico-pedidos/scripts/*`  
+  3.4. Caso os scripts estejam com erro, a causa talvez seja o caracter de fim de linha (CRLF ou LF).
+  Para corrigir execute o comando `sed -i 's/\r//' nome_do_script.sh`  
 
 ---
 
